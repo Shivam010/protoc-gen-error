@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package main;
+
+import "types.proto";
+
+message Object {
+    // errored: there's error reported on `two` and no suggestion for any of
+    // the field in braces.
+    string errored = 1 [(main.rule).type={one: "one", two:"two"}];
+    // working: works fine when braces are not used
+    string working = 2 [(main.rule).type.one="one"];
+}
